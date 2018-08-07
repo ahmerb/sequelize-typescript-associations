@@ -1,0 +1,15 @@
+{
+  "name": "sequelize-typescript-associations",
+  "version": "0.0.1",
+  "description": "generate mixins for ts sqlize ModelInstance interface",
+  "main": "index.js",
+  "author": "Ahmer Butt <ahmer.butt@vivacitylabs.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "argparse": "^1.0.10"
+  }
+}
