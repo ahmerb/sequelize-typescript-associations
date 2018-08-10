@@ -1,0 +1,187 @@
+yarn run v1.7.0
+$ node index.js -b CollectionImage -a User -s ActionedBy -p _ -t BelongsTo -j _
+export interface CollectionImageInstance extends Sequelize.Instance<CollectionImageAttributes>, CollectionImageAttributes {
+      
+    getActionedBy: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
+    setActionedBy: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+    createActionedBy: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
+    
+  };
+    
+Done in 0.16s.
+yarn run v1.7.0
+$ node index.js -b Image -a Tag Collection User User Annotation AnnotationHistory ModelDataSet -s Tag Collection DeletedBy CreatedBy Annotation AnnotationHistory ModelDataSet -p Tags Collections _ _ Annotations AnnotationHistories ModelDataSets -t BelongsToMany BelongsToMany BelongsTo BelongsTo HasMany HasMany BelongsToMany -j '"ImageTag"' CollectionImage _ _ _ _ ModelDataSetImage
+export interface ImageInstance extends Sequelize.Instance<ImageAttributes>, ImageAttributes {
+      
+    getTags: Sequelize.BelongsToManyGetAssociationsMixin<TagInstance>;
+    setTags: Sequelize.BelongsToManySetAssociationsMixin<TagInstance, TagInstance["id"], "ImageTag">;
+    addTags: Sequelize.BelongsToManyAddAssociationsMixin<TagInstance, TagInstance["id"], "ImageTag">;
+    addTag: Sequelize.BelongsToManyAddAssociationMixin<TagInstance, TagInstance["id"], "ImageTag">;
+    createTag: Sequelize.BelongsToManyCreateAssociationMixin<TagAttributes, TagInstance["id"], "ImageTag">;
+    removeTag: Sequelize.BelongsToManyRemoveAssociationMixin<TagInstance, TagInstance["id"]>;
+    removeTags: Sequelize.BelongsToManyRemoveAssociationsMixin<TagInstance, TagInstance["id"]>;
+    hasTag: Sequelize.BelongsToManyHasAssociationMixin<TagInstance, TagInstance["id"]>;
+    hasTags: Sequelize.BelongsToManyHasAssociationsMixin<TagInstance, TagInstance["id"]>;
+    countTags: Sequelize.BelongsToManyCountAssociationsMixin;
+    
+    getCollections: Sequelize.BelongsToManyGetAssociationsMixin<CollectionInstance>;
+    setCollections: Sequelize.BelongsToManySetAssociationsMixin<CollectionInstance, CollectionInstance["id"], CollectionImageAttributes>;
+    addCollections: Sequelize.BelongsToManyAddAssociationsMixin<CollectionInstance, CollectionInstance["id"], CollectionImageAttributes>;
+    addCollection: Sequelize.BelongsToManyAddAssociationMixin<CollectionInstance, CollectionInstance["id"], CollectionImageAttributes>;
+    createCollection: Sequelize.BelongsToManyCreateAssociationMixin<CollectionAttributes, CollectionInstance["id"], CollectionImageAttributes>;
+    removeCollection: Sequelize.BelongsToManyRemoveAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    removeCollections: Sequelize.BelongsToManyRemoveAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasCollection: Sequelize.BelongsToManyHasAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasCollections: Sequelize.BelongsToManyHasAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    countCollections: Sequelize.BelongsToManyCountAssociationsMixin;
+    
+    getDeletedBy: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
+    setDeletedBy: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+    createDeletedBy: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
+    
+    getCreatedBy: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
+    setCreatedBy: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+    createCreatedBy: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
+    
+    getAnnotations: Sequelize.HasManyGetAssociationsMixin<AnnotationInstance>;
+    setAnnotations: Sequelize.HasManySetAssociationsMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    addAnnotations: Sequelize.HasManyAddAssociationsMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    addAnnotation: Sequelize.HasManyAddAssociationMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    createAnnotation: Sequelize.HasManyCreateAssociationMixin<AnnotationAttributes, AnnotationInstance>;
+    removeAnnotation: Sequelize.HasManyRemoveAssociationMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    removeAnnotations: Sequelize.HasManyRemoveAssociationsMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    hasAnnotation: Sequelize.HasManyHasAssociationMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    hasAnnotations: Sequelize.HasManyHasAssociationsMixin<AnnotationInstance, AnnotationInstance["id"]>;
+    countAnnotations: Sequelize.HasManyCountAssociationsMixin;
+    
+    getAnnotationHistories: Sequelize.HasManyGetAssociationsMixin<AnnotationHistoryInstance>;
+    setAnnotationHistories: Sequelize.HasManySetAssociationsMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    addAnnotationHistories: Sequelize.HasManyAddAssociationsMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    addAnnotationHistory: Sequelize.HasManyAddAssociationMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    createAnnotationHistory: Sequelize.HasManyCreateAssociationMixin<AnnotationHistoryAttributes, AnnotationHistoryInstance>;
+    removeAnnotationHistory: Sequelize.HasManyRemoveAssociationMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    removeAnnotationHistories: Sequelize.HasManyRemoveAssociationsMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    hasAnnotationHistory: Sequelize.HasManyHasAssociationMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    hasAnnotationHistories: Sequelize.HasManyHasAssociationsMixin<AnnotationHistoryInstance, AnnotationHistoryInstance["id"]>;
+    countAnnotationHistories: Sequelize.HasManyCountAssociationsMixin;
+    
+    getModelDataSets: Sequelize.BelongsToManyGetAssociationsMixin<ModelDataSetInstance>;
+    setModelDataSets: Sequelize.BelongsToManySetAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"], ModelDataSetImageAttributes>;
+    addModelDataSets: Sequelize.BelongsToManyAddAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"], ModelDataSetImageAttributes>;
+    addModelDataSet: Sequelize.BelongsToManyAddAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"], ModelDataSetImageAttributes>;
+    createModelDataSet: Sequelize.BelongsToManyCreateAssociationMixin<ModelDataSetAttributes, ModelDataSetInstance["id"], ModelDataSetImageAttributes>;
+    removeModelDataSet: Sequelize.BelongsToManyRemoveAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    removeModelDataSets: Sequelize.BelongsToManyRemoveAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    hasModelDataSet: Sequelize.BelongsToManyHasAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    hasModelDataSets: Sequelize.BelongsToManyHasAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    countModelDataSets: Sequelize.BelongsToManyCountAssociationsMixin;
+    
+  };
+    
+Done in 0.15s.
+yarn run v1.7.0
+$ node index.js -b Model -a ClassGroup ModelDataSet -s ClassGroup DataSet -p ClassGroups DataSets -t BelongsTo HasMany -j _ _
+export interface ModelInstance extends Sequelize.Instance<ModelAttributes>, ModelAttributes {
+      
+    getClassGroup: Sequelize.BelongsToGetAssociationMixin<ClassGroupInstance>;
+    setClassGroup: Sequelize.BelongsToSetAssociationMixin<ClassGroupInstance, ClassGroupInstance["id"]>;
+    createClassGroup: Sequelize.BelongsToCreateAssociationMixin<ClassGroupAttributes>;
+    
+    getDataSets: Sequelize.HasManyGetAssociationsMixin<ModelDataSetInstance>;
+    setDataSets: Sequelize.HasManySetAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    addDataSets: Sequelize.HasManyAddAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    addDataSet: Sequelize.HasManyAddAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    createDataSet: Sequelize.HasManyCreateAssociationMixin<ModelDataSetAttributes, ModelDataSetInstance>;
+    removeDataSet: Sequelize.HasManyRemoveAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    removeDataSets: Sequelize.HasManyRemoveAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    hasDataSet: Sequelize.HasManyHasAssociationMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    hasDataSets: Sequelize.HasManyHasAssociationsMixin<ModelDataSetInstance, ModelDataSetInstance["id"]>;
+    countDataSets: Sequelize.HasManyCountAssociationsMixin;
+    
+  };
+    
+Done in 0.17s.
+yarn run v1.7.0
+$ node index.js -b ModelDataSet -a Model Image -s Model Image -p _ Images -t BelongsTo BelongsToMany -j _ ModelDataSetImage
+export interface ModelDataSetInstance extends Sequelize.Instance<ModelDataSetAttributes>, ModelDataSetAttributes {
+      
+    getModel: Sequelize.BelongsToGetAssociationMixin<ModelInstance>;
+    setModel: Sequelize.BelongsToSetAssociationMixin<ModelInstance, ModelInstance["id"]>;
+    createModel: Sequelize.BelongsToCreateAssociationMixin<ModelAttributes>;
+    
+    getImages: Sequelize.BelongsToManyGetAssociationsMixin<ImageInstance>;
+    setImages: Sequelize.BelongsToManySetAssociationsMixin<ImageInstance, ImageInstance["id"], ModelDataSetImageAttributes>;
+    addImages: Sequelize.BelongsToManyAddAssociationsMixin<ImageInstance, ImageInstance["id"], ModelDataSetImageAttributes>;
+    addImage: Sequelize.BelongsToManyAddAssociationMixin<ImageInstance, ImageInstance["id"], ModelDataSetImageAttributes>;
+    createImage: Sequelize.BelongsToManyCreateAssociationMixin<ImageAttributes, ImageInstance["id"], ModelDataSetImageAttributes>;
+    removeImage: Sequelize.BelongsToManyRemoveAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    removeImages: Sequelize.BelongsToManyRemoveAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    hasImage: Sequelize.BelongsToManyHasAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    hasImages: Sequelize.BelongsToManyHasAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    countImages: Sequelize.BelongsToManyCountAssociationsMixin;
+    
+  };
+    
+Done in 0.17s.
+yarn run v1.7.0
+$ node index.js -b User -a Collection Collection CollectionImage Image Image -s AssignerCollection AssigneeCollection CollectionImageActionedOn ImageCreated ImageDeleted -p AssignerCollections AssigneeCollections CollectionImagesActionedOn ImagesCreated ImagesDeleted -t HasMany BelongsToMany HasMany HasMany HasMany -j _ '"CollectionAssignee"' _ _ _
+export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {
+      
+    getAssignerCollections: Sequelize.HasManyGetAssociationsMixin<CollectionInstance>;
+    setAssignerCollections: Sequelize.HasManySetAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    addAssignerCollections: Sequelize.HasManyAddAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    addAssignerCollection: Sequelize.HasManyAddAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    createAssignerCollection: Sequelize.HasManyCreateAssociationMixin<CollectionAttributes, CollectionInstance>;
+    removeAssignerCollection: Sequelize.HasManyRemoveAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    removeAssignerCollections: Sequelize.HasManyRemoveAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasAssignerCollection: Sequelize.HasManyHasAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasAssignerCollections: Sequelize.HasManyHasAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    countAssignerCollections: Sequelize.HasManyCountAssociationsMixin;
+    
+    getAssigneeCollections: Sequelize.BelongsToManyGetAssociationsMixin<CollectionInstance>;
+    setAssigneeCollections: Sequelize.BelongsToManySetAssociationsMixin<CollectionInstance, CollectionInstance["id"], "CollectionAssignee">;
+    addAssigneeCollections: Sequelize.BelongsToManyAddAssociationsMixin<CollectionInstance, CollectionInstance["id"], "CollectionAssignee">;
+    addAssigneeCollection: Sequelize.BelongsToManyAddAssociationMixin<CollectionInstance, CollectionInstance["id"], "CollectionAssignee">;
+    createAssigneeCollection: Sequelize.BelongsToManyCreateAssociationMixin<CollectionAttributes, CollectionInstance["id"], "CollectionAssignee">;
+    removeAssigneeCollection: Sequelize.BelongsToManyRemoveAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    removeAssigneeCollections: Sequelize.BelongsToManyRemoveAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasAssigneeCollection: Sequelize.BelongsToManyHasAssociationMixin<CollectionInstance, CollectionInstance["id"]>;
+    hasAssigneeCollections: Sequelize.BelongsToManyHasAssociationsMixin<CollectionInstance, CollectionInstance["id"]>;
+    countAssigneeCollections: Sequelize.BelongsToManyCountAssociationsMixin;
+    
+    getCollectionImagesActionedOn: Sequelize.HasManyGetAssociationsMixin<CollectionImageInstance>;
+    setCollectionImagesActionedOn: Sequelize.HasManySetAssociationsMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    addCollectionImagesActionedOn: Sequelize.HasManyAddAssociationsMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    addCollectionImageActionedOn: Sequelize.HasManyAddAssociationMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    createCollectionImageActionedOn: Sequelize.HasManyCreateAssociationMixin<CollectionImageAttributes, CollectionImageInstance>;
+    removeCollectionImageActionedOn: Sequelize.HasManyRemoveAssociationMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    removeCollectionImagesActionedOn: Sequelize.HasManyRemoveAssociationsMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    hasCollectionImageActionedOn: Sequelize.HasManyHasAssociationMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    hasCollectionImagesActionedOn: Sequelize.HasManyHasAssociationsMixin<CollectionImageInstance, CollectionImageInstance["id"]>;
+    countCollectionImagesActionedOn: Sequelize.HasManyCountAssociationsMixin;
+    
+    getImagesCreated: Sequelize.HasManyGetAssociationsMixin<ImageInstance>;
+    setImagesCreated: Sequelize.HasManySetAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    addImagesCreated: Sequelize.HasManyAddAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    addImageCreated: Sequelize.HasManyAddAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    createImageCreated: Sequelize.HasManyCreateAssociationMixin<ImageAttributes, ImageInstance>;
+    removeImageCreated: Sequelize.HasManyRemoveAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    removeImagesCreated: Sequelize.HasManyRemoveAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    hasImageCreated: Sequelize.HasManyHasAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    hasImagesCreated: Sequelize.HasManyHasAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    countImagesCreated: Sequelize.HasManyCountAssociationsMixin;
+    
+    getImagesDeleted: Sequelize.HasManyGetAssociationsMixin<ImageInstance>;
+    setImagesDeleted: Sequelize.HasManySetAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    addImagesDeleted: Sequelize.HasManyAddAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    addImageDeleted: Sequelize.HasManyAddAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    createImageDeleted: Sequelize.HasManyCreateAssociationMixin<ImageAttributes, ImageInstance>;
+    removeImageDeleted: Sequelize.HasManyRemoveAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    removeImagesDeleted: Sequelize.HasManyRemoveAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    hasImageDeleted: Sequelize.HasManyHasAssociationMixin<ImageInstance, ImageInstance["id"]>;
+    hasImagesDeleted: Sequelize.HasManyHasAssociationsMixin<ImageInstance, ImageInstance["id"]>;
+    countImagesDeleted: Sequelize.HasManyCountAssociationsMixin;
+    
+  };
+    
+Done in 0.15s.
