@@ -15,13 +15,18 @@ const initArgParser = (ArgParserClass) => {
   )
   
   parser.addArgument(
-    [ '-a', '--associationName' ],
-    { help: 'array of name of associations', nargs: '+' },
+    [ '-a', '--associationModelName' ],
+    { help: 'array of name of model of associations', nargs: '+' },
+  );
+
+  parser.addArgument(
+    [ '-s', '--singular' ],
+    { help: 'array of singular of alias names (the alias for association, may be same as associationModelName)', nargs: '+' }
   );
   
   parser.addArgument(
     [ '-p', '--plural' ],
-    { help: 'array of plural of association names (if n/a then use _)', nargs: '+' },
+    { help: 'array of plural of alias names (if n/a then use _)', nargs: '+' },
   );
   
   parser.addArgument(
@@ -38,15 +43,15 @@ const initArgParser = (ArgParserClass) => {
 }
 
 // FIXME: this doesn't seem to work
-const assertArgLengthsAreTheSame = (args) => {
-  ["associationName", "plural", "type", "joinTable"].map(k => console.log(args[k].length));
-  console.log(args.associationName.length === args.plural.length === args.type.length === args.joinTable.length);
-  return args.associationName.length === args.plural.length === args.type.length === args.joinTable.length;
-};
+// const assertArgLengthsAreTheSame = (args) => {
+//   ["associationModelName", "plural", "type", "joinTable"].map(k => console.log(args[k].length));
+//   console.log(args.associationModelName.length === args.plural.length === args.type.length === args.joinTable.length);
+//   return args.associationModelName.length === args.plural.length === args.type.length === args.joinTable.length;
+// };
 
-const addMixinsBelongsTo = (singular) => {
-  const AssocInstance = `${singular}Instance`;
-  const AssocAttributes = `${singular}Attributes`;
+const addMixinsBelongsTo = (associationModelName, singular) => {
+  const AssocInstance = `${associationModelName}Instance`;
+  const AssocAttributes = `${associationModelName}Attributes`;
   return (
     `
     get${singular}: Sequelize.BelongsToGetAssociationMixin<${AssocInstance}>;
@@ -56,9 +61,9 @@ const addMixinsBelongsTo = (singular) => {
   );
 };
 
-const addMixinsHasOne = (singular) => {
-  const AssocInstance = `${singular}Instance`;
-  const AssocAttributes = `${singular}Attributes`;
+const addMixinsHasOne = (associationModelName, singular) => {
+  const AssocInstance = `${associationModelName}Instance`;
+  const AssocAttributes = `${associationModelName}Attributes`;
   return (
     `
     get${singular}: Sequelize.HasOneGetAssociationMixin<${AssocInstance}>;
@@ -68,9 +73,9 @@ const addMixinsHasOne = (singular) => {
   );
 };
 
-const addMixinsHasMany = (singular, plural) => {
-  const AssocInstance = `${singular}Instance`;
-  const AssocAttributes = `${singular}Attributes`;
+const addMixinsHasMany = (associationModelName, singular, plural) => {
+  const AssocInstance = `${associationModelName}Instance`;
+  const AssocAttributes = `${associationModelName}Attributes`;
   return (
     `
     get${plural}: Sequelize.HasManyGetAssociationsMixin<${AssocInstance}>;
@@ -87,9 +92,9 @@ const addMixinsHasMany = (singular, plural) => {
   );
 };
 
-const addMixinsBelongsToMany = (singular, plural, joinTableName) => {
-  const AssocInstance = `${singular}Instance`;
-  const AssocAttributes = `${singular}Attributes`;
+const addMixinsBelongsToMany = (associationModelName, singular, plural, joinTableName) => {
+  const AssocInstance = `${associationModelName}Instance`;
+  const AssocAttributes = `${associationModelName}Attributes`;
   const JoinTableAttributes = joinTableName[0] === '\"' || joinTableName[0] === "\'"
     ? joinTableName
     : `${joinTableName}Attributes`;
@@ -110,17 +115,17 @@ const addMixinsBelongsToMany = (singular, plural, joinTableName) => {
   );
 };
 
-const generateInterface = ({ baseModelName, associationName, plural, type, joinTable }) => {
+const generateInterface = ({ baseModelName, associationModelName, singular, plural, type, joinTable }) => {
   let mixinsString = '';
-  for (let i = 0; i < associationName.length; i++) {
+  for (let i = 0; i < associationModelName.length; i++) {
     if (type[i] === "BelongsTo") {
-      mixinsString += addMixinsBelongsTo(associationName[i]);
+      mixinsString += addMixinsBelongsTo(associationModelName[i], singular[i]);
     } else if (type[i] === "HasOne") {
-      mixinsString += addMixinsHasOne(associationName[i]);
+      mixinsString += addMixinsHasOne(associationModelName[i], singular[i]);
     } else if (type[i] === "HasMany") {
-      mixinsString += addMixinsHasMany(associationName[i], plural[i]);
+      mixinsString += addMixinsHasMany(associationModelName[i], singular[i], plural[i]);
     } else if (type[i] === "BelongsToMany") {
-      mixinsString += addMixinsBelongsToMany(associationName[i], plural[i], joinTable[i]);
+      mixinsString += addMixinsBelongsToMany(associationModelName[i], singular[i], plural[i], joinTable[i]);
     } else {
       console.error("incorrect type: ", type[i]);
       return;
