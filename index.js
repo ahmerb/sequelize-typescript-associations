@@ -77,7 +77,7 @@ const addMixinsHasMany = (singular, plural) => {
     set${plural}: Sequelize.HasManySetAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
     add${plural}: Sequelize.HasManyAddAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
     add${singular}: Sequelize.HasManyAddAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
-    create${singular}: Sequelize.HasManyAddAssociationMixin<${AssocAttributes}>;
+    create${singular}: Sequelize.HasManyCreateAssociationMixin<${AssocAttributes}, ${AssocInstance}>;
     remove${singular}: Sequelize.HasManyRemoveAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
     remove${plural}: Sequelize.HasManyRemoveAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
     has${singular}: Sequelize.HasManyHasAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
@@ -90,18 +90,22 @@ const addMixinsHasMany = (singular, plural) => {
 const addMixinsBelongsToMany = (singular, plural, joinTableName) => {
   const AssocInstance = `${singular}Instance`;
   const AssocAttributes = `${singular}Attributes`;
+  const JoinTableAttributes = joinTableName[0] === '\"' || joinTableName[0] === "\'"
+    ? joinTableName
+    : `${joinTableName}Attributes`;
+
   return (
     `
-    get${plural}: Sequelize.HasManyGetAssociationsMixin<${AssocInstance}>;
-    set${plural}: Sequelize.HasManySetAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"], ${joinTableName}>;
-    add${plural}: Sequelize.HasManyAddAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"], ${joinTableName}>;
-    add${singular}: Sequelize.HasManyAddAssociationMixin<${AssocInstance}, ${AssocInstance}["id"], ${joinTableName}>;
-    create${singular}: Sequelize.HasManyAddAssociationMixin<${AssocAttributes}, ${joinTableName}>;
-    remove${singular}: Sequelize.HasManyRemoveAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
-    remove${plural}: Sequelize.HasManyRemoveAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
-    has${singular}: Sequelize.HasManyHasAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
-    has${plural}: Sequelize.HasManyHasAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
-    count${plural}: Sequelize.HasManyCountAssociationsMixin;
+    get${plural}: Sequelize.BelongsToManyGetAssociationsMixin<${AssocInstance}>;
+    set${plural}: Sequelize.BelongsToManySetAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"], ${JoinTableAttributes}>;
+    add${plural}: Sequelize.BelongsToManyAddAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"], ${JoinTableAttributes}>;
+    add${singular}: Sequelize.BelongsToManyAddAssociationMixin<${AssocInstance}, ${AssocInstance}["id"], ${JoinTableAttributes}>;
+    create${singular}: Sequelize.BelongsToManyCreateAssociationMixin<${AssocAttributes}, ${AssocInstance}["id"], ${JoinTableAttributes}>;
+    remove${singular}: Sequelize.BelongsToManyRemoveAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
+    remove${plural}: Sequelize.BelongsToManyRemoveAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
+    has${singular}: Sequelize.BelongsToManyHasAssociationMixin<${AssocInstance}, ${AssocInstance}["id"]>;
+    has${plural}: Sequelize.BelongsToManyHasAssociationsMixin<${AssocInstance}, ${AssocInstance}["id"]>;
+    count${plural}: Sequelize.BelongsToManyCountAssociationsMixin;
     `
   );
 };
@@ -126,7 +130,7 @@ const generateInterface = ({ baseModelName, associationName, plural, type, joinT
   let interfaceString =
     `export interface ${baseModelName}Instance extends Sequelize.Instance<${baseModelName}Attributes>, ${baseModelName}Attributes {
       ${mixinsString}
-    };
+  };
     `;
 
   return interfaceString;
