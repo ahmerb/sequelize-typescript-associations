@@ -87,8 +87,8 @@ Image.BelongsToMany(Collection, { through: "CollectionImage" });
 If you want to add more attributes to the join table, or customise it in some way, you can define the join table just like any other model and than set that to the `through` field. E.g.,
 
 ```typescript
-User.BelongsToMany(Collection, { through: CollectionAssignee });
-Collection.BelongsToMany(User, { through: CollectionAssignee });
+User.BelongsToMany(Collection, { through: CollectionAssigneeAttributes });
+Collection.BelongsToMany(User, { through: CollectionAssigneeAttributes });
 ```
 
 Which is chosen has implications on the mixin definitions. Consider the mixins for the above to n:m associations. The first is defined as follows. Note the third type parameter to the mixin.
