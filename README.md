@@ -5,7 +5,7 @@ Generate ModelInstance interfaces for your sequelize models. The ModelInstance i
 ## Usage
 
 ```shell
-$ yarn dev -b User -a Collection Collection Image Image User -s AssignerCollection AssigneeCollection ProfilePhoto ImageCreated InvitedBy -p AssignerCollections AssigneeCollections _ ImagesCreated _ -t HasMany BelongsToMany BelongsTo HasMany BelongsTo -j _ CollectionAssignee _ _ _
+$ yarn gen -b User -a Collection Collection Image Image User -s AssignerCollection AssigneeCollection ProfilePhoto ImageCreated InvitedBy -p AssignerCollections AssigneeCollections _ ImagesCreated _ -t HasMany BelongsToMany BelongsTo HasMany BelongsTo -j _ CollectionAssignee _ _ _
 ```
 
 This will generate the following interface:

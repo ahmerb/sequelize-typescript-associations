@@ -1,5 +1,0 @@
-yarn dev -b CollectionImage -a User -s ActionedBy -p _ -t BelongsTo -j _
-yarn dev -b Image -a Tag Collection User User Annotation AnnotationHistory ModelDataSet -s Tag Collection DeletedBy CreatedBy Annotation AnnotationHistory ModelDataSet -p Tags Collections _ _ Annotations AnnotationHistories ModelDataSets -t BelongsToMany BelongsToMany BelongsTo BelongsTo HasMany HasMany BelongsToMany -j \"ImageTag\" CollectionImage _ _ _ _ ModelDataSetImage
-yarn dev -b Model -a ClassGroup ModelDataSet -s ClassGroup DataSet -p ClassGroups DataSets -t BelongsTo HasMany -j _ _
-yarn dev -b ModelDataSet -a Model Image -s Model Image -p _ Images -t BelongsTo BelongsToMany -j _ ModelDataSetImage
-yarn dev -b User -a Collection Collection CollectionImage Image Image -s AssignerCollection AssigneeCollection CollectionImageActionedOn ImageCreated ImageDeleted -p AssignerCollections AssigneeCollections CollectionImagesActionedOn ImagesCreated ImagesDeleted -t HasMany BelongsToMany HasMany HasMany HasMany -j _ \"CollectionAssignee\" _ _ _

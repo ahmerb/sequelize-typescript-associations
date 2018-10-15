@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "node index.js"
+    "gen": "node index.js"
   },
   "dependencies": {
     "argparse": "^1.0.10"
